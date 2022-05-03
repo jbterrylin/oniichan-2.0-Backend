@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
   def index
     @users = User.all
+    render json: { status: :ok, data: @user }
   end
 
   # GET /users/1 or /users/1.json
