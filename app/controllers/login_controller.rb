@@ -1,25 +1,16 @@
 class LoginController < ApplicationController
-    skip_before_action :require_login, only: [:create]
+    before_action :authorize_request, except: :create
 
-  def create
-    if params[:isLogin]
+    def create
         # @hashpassword = 
         user = User.find_by(name: params[:name], password: params[:password])
         if user
-            session[:user_id] = user.id
+            token = JsonWebToken.encode(user_id: user.id)
+            time = Time.now + 24.hours.to_i
 
-            render json: { status: :ok, message: 'Success', data: user.as_json.except("password") }
+            render json: { status: :ok, message: 'Success', token: token, exp: time.strftime("%m-%d-%Y %H:%M"), data: user.as_json.except("password") }
         else
-            render json: { message: "data not found" }, status: 404
-        end
-    else
-        user = User.new(user_params)
-        user.as_json.except("password")
-        if user.save
-            render json: { status: :ok, message: 'Success' }
-        else
-            render json: { json: user.errors, status: :unprocessable_entity }
+            render json: { message: "wrong password or name" }, status: 404
         end
     end
-  end
 end
