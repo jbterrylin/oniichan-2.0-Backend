@@ -10,7 +10,7 @@ class LoginController < ApplicationController
 
             render json: { status: :ok, message: 'Success', token: token, exp: time.strftime("%m-%d-%Y %H:%M"), data: user.as_json.except("password") }
         else
-            render json: { message: "wrong password or name" }, status: 404
+            render json: { errors: "wrong password or name" }, status: 404
         end
     end
 end

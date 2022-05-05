@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def get_user_id
+        return JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[:user_id]
+    end
+
+    def object_with_user_id(obj)
+        return obj.merge(:user_id => get_user_id)
+    end
+
     def route_not_found
         render json: { message: "route not found" }, status: :not_found
     end
