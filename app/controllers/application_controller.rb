@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
     end
 
     def route_not_found
-        render json: { message: "route not found" }, status: :not_found
+        render json: { errors: "route not found" }, status: :not_found
     end
 end
