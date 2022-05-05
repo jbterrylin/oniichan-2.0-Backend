@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  user_id: 
+  paper_type: 
+  user_shop_id: 
+  price_unit: MyString
+  customer_id: 
+  discount: MyString
+  deposit: MyString
+  is_deleted: false
+
+two:
+  name: MyString
+  user_id: 
+  paper_type: 
+  user_shop_id: 
+  price_unit: MyString
+  customer_id: 
+  discount: MyString
+  deposit: MyString
+  is_deleted: false
