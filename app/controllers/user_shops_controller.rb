@@ -1,28 +1,41 @@
 class UserShopsController < ApplicationController
     before_action :authorize_request
-    before_action :set_user_shop, only: %i[ show edit update destroy ]
 
     def index
         render json: { status: :ok, data: UserShop.all }
     end
   
     def show
-        userShop = UserShop.where(user_id: get_user_id)
+        userShop = UserShop.where(users_id: get_user_id)
         lastCreateDate = userShop.maximum(:created_at)
         render json: { status: :ok, data: userShop.where(created_at: lastCreateDate)[0] }
     end
 
     def create
-        user = UserShop.create(object_with_user_id(user_shop_params))
-        render json: { status: :ok, data: user, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+        userShop = UserShop.where(users_id: get_user_id)
+        
+        # only check if have record
+        if userShop.count != 0
+            lastCreateDate = userShop.maximum(:created_at)
+            userShop = userShop.where(created_at: lastCreateDate)[0]
+            userShop = userShop.as_json.keep_if {|k, v| ["name", "address", "ssm", "boss_name", "boss_phone", "nick_name"].include?(k)}
+
+            if user_shop_params == userShop
+                render json: { errors: "Don't update shop with same data" }, status: 422
+                return
+            end
+        end
+
+        shop = UserShop.new(object_with_user_id(user_shop_params))
+
+        if  shop.valid? & shop.save
+            render json: { status: :ok, data: shop, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+        else
+            return_valid_fail_json(shop)
+        end
     end
 
     private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_shop
-        @shop = UserShop.find_by(id: get_user_id)
-    end
-
     # Only allow a list of trusted parameters through.
     def user_shop_params
         params.permit(:name, :address, :ssm, :boss_name, :boss_phone, :nick_name)

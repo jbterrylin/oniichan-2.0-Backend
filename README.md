@@ -20,5 +20,7 @@ bin/rails db:migrate
 
 rake routes
 
-todo:
-    UserShop isdeleted not use anymore
+
+rails db:drop:_unsafe
+rails db:create db:migrate
+rake db:seed

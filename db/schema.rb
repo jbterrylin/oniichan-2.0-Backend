@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_135203) do
+ActiveRecord::Schema.define(version: 2022_05_06_073041) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "phone"
     t.boolean "is_deleted"
-    t.bigint "user_id"
-    t.bigint "paper_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "users_id"
+    t.integer "papers_id"
+    t.index ["papers_id"], name: "index_customers_on_papers_id"
+    t.index ["users_id"], name: "index_customers_on_users_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -28,25 +30,28 @@ ActiveRecord::Schema.define(version: 2022_05_05_135203) do
     t.string "unit_price"
     t.string "unit"
     t.integer "sort_id"
-    t.bigint "paper_id"
     t.boolean "is_deleted"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "papers_id"
+    t.integer "users_id"
+    t.index ["papers_id"], name: "index_items_on_papers_id"
+    t.index ["users_id"], name: "index_items_on_users_id"
   end
 
   create_table "papers", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
     t.string "paper_type"
-    t.integer "user_shop_id"
     t.string "price_unit"
-    t.integer "customer_id"
     t.string "discount"
     t.string "deposit"
     t.boolean "is_deleted"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "users_id"
+    t.integer "user_shops_id"
+    t.index ["user_shops_id"], name: "index_papers_on_user_shops_id"
+    t.index ["users_id"], name: "index_papers_on_users_id"
   end
 
   create_table "user_shops", force: :cascade do |t|
@@ -55,11 +60,11 @@ ActiveRecord::Schema.define(version: 2022_05_05_135203) do
     t.string "ssm"
     t.string "boss_name"
     t.string "boss_phone"
-    t.bigint "user_id"
     t.string "nick_name"
-    t.boolean "is_deleted"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "users_id"
+    t.index ["users_id"], name: "index_user_shops_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|

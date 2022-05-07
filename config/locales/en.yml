@@ -30,4 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models: 
+      customer: "Customer"
+      item: "Item"
+    attributes:
+      customer:
+        name: "Customer name"
+        address: "Customer address"
+        phone: "Customer phone"
+      item:
+        description: "Customer description"
+        unit_price: "Customer unit_price"
+        unit: "Customer unit"

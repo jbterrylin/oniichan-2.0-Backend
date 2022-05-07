@@ -1,23 +1,23 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  user_id: 
-  paper_type: 
-  user_shop_id: 
-  price_unit: MyString
-  customer_id: 
-  discount: MyString
-  deposit: MyString
+  name: "MyString"
+  user_id: 1
+  paper_type: 1
+  user_shop_id: 1
+  price_unit: "MyString"
+  customer_id: 1
+  discount: "MyString"
+  deposit: "MyString"
   is_deleted: false
 
 two:
-  name: MyString
-  user_id: 
-  paper_type: 
-  user_shop_id: 
-  price_unit: MyString
-  customer_id: 
-  discount: MyString
-  deposit: MyString
+  name: "MyString"
+  user_id: 2
+  paper_type: 2
+  user_shop_id: 2
+  price_unit: "MyString"
+  customer_id: 2
+  discount: "MyString"
+  deposit: "MyString"
   is_deleted: false
