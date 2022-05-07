@@ -13,7 +13,7 @@ class AddFk < ActiveRecord::Migration[6.1]
     add_reference :papers, :users
     add_reference :papers, :user_shops
     remove_column :papers, :user_id, :bigint
-    remove_column :papers, :user_shop_id, :bigint
+    remove_column :papers, :user_shops_id, :bigint
     remove_column :papers, :customer_id, :bigint
 
     add_reference :user_shops, :users
