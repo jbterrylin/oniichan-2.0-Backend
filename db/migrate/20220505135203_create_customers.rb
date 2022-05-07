@@ -6,7 +6,6 @@ class CreateCustomers < ActiveRecord::Migration[6.1]
       t.string :phone
       t.boolean :is_deleted
       t.bigint :user_id
-      t.bigint :paper_id
 
       t.timestamps
     end

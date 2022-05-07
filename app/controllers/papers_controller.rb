@@ -14,8 +14,17 @@ class PapersController < ApplicationController
             render json: { status: :ok, data: papers, detail: { total: papers.count } }
         else
             paper = Paper.new(helpers.object_with_user_id(paper_params))
-            
-            paper.user_shop= helpers.current_User_Shop
+            paper.user_shop = helpers.current_User_Shop
+
+            # customer
+            customer = params.permit(customer: [:name, :address, :phone])[:customer]
+            paper.create_customer(helpers.object_with_user_id(customer))
+            if !paper.customer.valid?
+                helpers.return_valid_fail_json(paper.customer)
+                paper.destroy
+                return
+            end
+
             if paper.valid? & paper.save
                 # items
                 items = params.permit(items: [:sort_id, :description, :unit_price, :unit])[:items]
@@ -28,15 +37,6 @@ class PapersController < ApplicationController
                         paper.destroy
                         return
                     end
-                end
-
-                # customer
-                customer = params.permit(customer: [:name, :address, :phone])[:customer]
-                paper.create_customer(helpers.object_with_user_id(customer))
-                if !paper.customer.valid?
-                    helpers.return_valid_fail_json(paper.customer)
-                    paper.destroy
-                    return
                 end
                 render json: { status: :ok, data: paper, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
             else

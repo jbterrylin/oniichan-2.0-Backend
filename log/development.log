@@ -26422,3 +26422,783 @@ Migrating to AddFk (20220506073041)
   [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:41:02 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.41.0", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.41.0", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.4ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 47ms (ActiveRecord: 3.7ms | Allocations: 20946)
+
+
+  
+ActiveModel::MissingAttributeError (can't write unknown attribute `user_shops_id`):
+  
+app/controllers/papers_controller.rb:18:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:41:40 +0800
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.41.39", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.41.39", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.4ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 183ms (ActiveRecord: 3.9ms | Allocations: 21515)
+
+
+  
+ActiveModel::MissingAttributeError (can't write unknown attribute `user_shops_id`):
+  
+app/controllers/papers_controller.rb:19:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:42:32 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.42.31", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.42.31", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.4ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 183ms (ActiveRecord: 5.1ms | Allocations: 21914)
+
+
+  
+NoMethodError (undefined method `<<' for nil:NilClass):
+  
+app/controllers/papers_controller.rb:19:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:42:46 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.42.31", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.42.31", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.6ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 198ms (ActiveRecord: 4.0ms | Allocations: 21548)
+
+
+  
+ActiveModel::MissingAttributeError (can't write unknown attribute `user_shops_id`):
+  
+app/controllers/papers_controller.rb:19:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:44:20 +0800
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.44.17", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.44.17", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.4ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 406ms (ActiveRecord: 5.7ms | Allocations: 23764)
+
+
+  
+NoMethodError (undefined method `user_shops=' for #<Paper id: nil, name: "2022-5-7~18.44.17", paper_type: "quotation", price_unit: "rm", discount: "0.00", deposit: "8.00", is_deleted: nil, created_at: nil, updated_at: nil, users_id: 1, user_shops_id: nil>
+Did you mean?  user_shop=
+               user_shop
+               user_shops_id=
+               user_shops_id):
+  
+app/controllers/papers_controller.rb:19:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:44:28 +0800
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.44.17", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.44.17", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.3ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.1ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 377ms (ActiveRecord: 4.5ms | Allocations: 21552)
+
+
+  
+ActiveModel::MissingAttributeError (can't write unknown attribute `user_shops_id`):
+  
+app/controllers/papers_controller.rb:19:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:48:24 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.48.24", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.48.24", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.3ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 387ms (ActiveRecord: 4.5ms | Allocations: 21558)
+
+
+  
+ActiveModel::MissingAttributeError (can't write unknown attribute `user_shops_id`):
+  
+app/controllers/papers_controller.rb:19:in `create'
+Started POST "/papers" for 127.0.0.1 at 2022-05-07 18:49:22 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-7~18.49.22", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-7~18.49.22", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.3ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 10:21:26.624518"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:20:in `create'
+  [1m[36mPaper Create (1.2ms)[0m  [1m[32mINSERT INTO "papers" ("name", "paper_type", "price_unit", "discount", "deposit", "created_at", "updated_at", "users_id", "user_shops_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "2022-5-7~18.49.22"], ["paper_type", "quotation"], ["price_unit", "rm"], ["discount", "0.00"], ["deposit", "8.00"], ["created_at", "2022-05-07 10:49:23.055744"], ["updated_at", "2022-05-07 10:49:23.055744"], ["users_id", 1], ["user_shops_id", 7]]
+  ↳ app/controllers/papers_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:20:in `create'
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :customer, :discount, :deposit, :paper[0m
+  [1m[36mItem Load (0.9ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."papers_id" = ?[0m  [["papers_id", 2]]
+  ↳ app/controllers/papers_controller.rb:26:in `create'
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :discount, :deposit, :items, :paper[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:36:in `create'
+  [1m[36mCustomer Create (4.8ms)[0m  [1m[32mINSERT INTO "customers" ("name", "address", "phone", "created_at", "updated_at", "users_id", "papers_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "123"], ["address", "456"], ["phone", "7890"], ["created_at", "2022-05-07 10:49:23.136248"], ["updated_at", "2022-05-07 10:49:23.136248"], ["users_id", 1], ["papers_id", 2]]
+  ↳ app/controllers/papers_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (5.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:36:in `create'
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."papers_id" = ? LIMIT ?[0m  [["papers_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/papers_controller.rb:36:in `create'
+Completed 200 OK in 378ms (Views: 1.8ms | ActiveRecord: 29.0ms | Allocations: 43695)
+
+
+Started GET "//papers" for ::1 at 2022-05-07 18:49:34 +0800
+Processing by PapersController#index as */*
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mPaper Load (0.5ms)[0m  [1m[34mSELECT "papers".* FROM "papers"[0m
+  ↳ app/controllers/papers_controller.rb:6:in `index'
+Completed 200 OK in 43ms (Views: 11.3ms | ActiveRecord: 3.6ms | Allocations: 16066)
+
+
+Started GET "//user_shops" for ::1 at 2022-05-07 18:49:40 +0800
+Processing by UserShopsController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUserShop Load (0.3ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops"[0m
+  ↳ app/controllers/user_shops_controller.rb:5:in `index'
+Completed 200 OK in 33ms (Views: 24.2ms | ActiveRecord: 1.8ms | Allocations: 8987)
+
+
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddFk (20220506073041)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "user_shops" ADD "is_deleted" bigint[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "user_shops" ADD "user_id" bigint[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "auser_shops" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "ssm" varchar DEFAULT NULL, "boss_name" varchar DEFAULT NULL, "boss_phone" varchar DEFAULT NULL, "nick_name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "is_deleted" integer DEFAULT NULL, "user_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_auser_shops_on_users_id" ON "auser_shops" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "auser_shops" ("id","name","address","ssm","boss_name","boss_phone","nick_name","created_at","updated_at","users_id","is_deleted","user_id")
+                     SELECT "id","name","address","ssm","boss_name","boss_phone","nick_name","created_at","updated_at","users_id","is_deleted","user_id" FROM "user_shops"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "user_shops"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "user_shops" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "ssm" varchar DEFAULT NULL, "boss_name" varchar DEFAULT NULL, "boss_phone" varchar DEFAULT NULL, "nick_name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "is_deleted" integer DEFAULT NULL, "user_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "user_shops" ("id","name","address","ssm","boss_name","boss_phone","nick_name","created_at","updated_at","is_deleted","user_id")
+                     SELECT "id","name","address","ssm","boss_name","boss_phone","nick_name","created_at","updated_at","is_deleted","user_id" FROM "auser_shops"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "auser_shops"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "papers" ADD "customer_id" bigint[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "papers" ADD "user_shops_id" bigint[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20220428115044)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "password" varchar, "is_deleted" boolean, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220428115044"]]
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUserShops (20220430071635)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "user_shops" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "ssm" varchar, "boss_name" varchar, "boss_phone" varchar, "user_id" bigint, "nick_name" varchar, "is_deleted" boolean, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220430071635"]]
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateItems (20220503171432)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "unit_price" varchar, "unit" varchar, "sort_id" integer, "paper_id" bigint, "is_deleted" boolean, "user_id" bigint, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220503171432"]]
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePapers (20220503171514)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "papers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "user_id" bigint, "type" varchar, "user_shop_id" bigint, "price_unit" varchar, "customer_id" bigint, "discount_unit" varchar, "discount" varchar, "deposit" varchar, "is_deleted" boolean, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220503171514"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to FixColumnName (20220505125837)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apapers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount_unit" varchar DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "apapers" ("id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount_unit","discount","deposit","is_deleted","created_at","updated_at")
+                     SELECT "id","name","user_id","type","user_shop_id","price_unit","customer_id","discount_unit","discount","deposit","is_deleted","created_at","updated_at" FROM "papers"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE "papers"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "papers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount_unit" varchar DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "papers" ("id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount_unit","discount","deposit","is_deleted","created_at","updated_at")
+                     SELECT "id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount_unit","discount","deposit","is_deleted","created_at","updated_at" FROM "apapers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "apapers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220505125837"]]
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to RemoveFieldNameFromPaper (20220505130453)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apapers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount_unit" varchar DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "apapers" ("id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount_unit","discount","deposit","is_deleted","created_at","updated_at")
+                     SELECT "id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount_unit","discount","deposit","is_deleted","created_at","updated_at" FROM "papers"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "papers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "papers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "papers" ("id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at")
+                     SELECT "id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at" FROM "apapers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apapers"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220505130453"]]
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCustomers (20220505135203)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "customers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "phone" varchar, "is_deleted" boolean, "user_id" bigint, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220505135203"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddFk (20220506073041)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "customers" ADD "users_id" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_customers_on_users_id" ON "customers" ("users_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acustomers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "phone" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "user_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_acustomers_on_users_id" ON "acustomers" ("users_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "acustomers" ("id","name","address","phone","is_deleted","user_id","created_at","updated_at","users_id")
+                     SELECT "id","name","address","phone","is_deleted","user_id","created_at","updated_at","users_id" FROM "customers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "customers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "customers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "phone" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_customers_on_users_id" ON "customers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "customers" ("id","name","address","phone","is_deleted","created_at","updated_at","users_id")
+                     SELECT "id","name","address","phone","is_deleted","created_at","updated_at","users_id" FROM "acustomers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "acustomers"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "items" ADD "papers_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_items_on_papers_id" ON "items" ("papers_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "items" ADD "users_id" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_items_on_users_id" ON "items" ("users_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aitems" ("id" integer NOT NULL PRIMARY KEY, "description" varchar DEFAULT NULL, "unit_price" varchar DEFAULT NULL, "unit" varchar DEFAULT NULL, "sort_id" integer DEFAULT NULL, "paper_id" integer DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "user_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "papers_id" integer DEFAULT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_users_id" ON "aitems" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_papers_id" ON "aitems" ("papers_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aitems" ("id","description","unit_price","unit","sort_id","paper_id","is_deleted","user_id","created_at","updated_at","papers_id","users_id")
+                     SELECT "id","description","unit_price","unit","sort_id","paper_id","is_deleted","user_id","created_at","updated_at","papers_id","users_id" FROM "items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "items"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer NOT NULL PRIMARY KEY, "description" varchar DEFAULT NULL, "unit_price" varchar DEFAULT NULL, "unit" varchar DEFAULT NULL, "sort_id" integer DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "user_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "papers_id" integer DEFAULT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_items_on_papers_id" ON "items" ("papers_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_items_on_users_id" ON "items" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "items" ("id","description","unit_price","unit","sort_id","is_deleted","user_id","created_at","updated_at","papers_id","users_id")
+                     SELECT "id","description","unit_price","unit","sort_id","is_deleted","user_id","created_at","updated_at","papers_id","users_id" FROM "aitems"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aitems"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aitems" ("id" integer NOT NULL PRIMARY KEY, "description" varchar DEFAULT NULL, "unit_price" varchar DEFAULT NULL, "unit" varchar DEFAULT NULL, "sort_id" integer DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "user_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "papers_id" integer DEFAULT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_users_id" ON "aitems" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aitems_on_papers_id" ON "aitems" ("papers_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aitems" ("id","description","unit_price","unit","sort_id","is_deleted","user_id","created_at","updated_at","papers_id","users_id")
+                     SELECT "id","description","unit_price","unit","sort_id","is_deleted","user_id","created_at","updated_at","papers_id","users_id" FROM "items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "items" ("id" integer NOT NULL PRIMARY KEY, "description" varchar DEFAULT NULL, "unit_price" varchar DEFAULT NULL, "unit" varchar DEFAULT NULL, "sort_id" integer DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "papers_id" integer DEFAULT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_items_on_papers_id" ON "items" ("papers_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_items_on_users_id" ON "items" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "items" ("id","description","unit_price","unit","sort_id","is_deleted","created_at","updated_at","papers_id","users_id")
+                     SELECT "id","description","unit_price","unit","sort_id","is_deleted","created_at","updated_at","papers_id","users_id" FROM "aitems"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "aitems"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "papers" ADD "users_id" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_papers_on_users_id" ON "papers" ("users_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "papers" ADD "user_shops_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_papers_on_user_shops_id" ON "papers" ("user_shops_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "papers" ADD "customers_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_customers_id" ON "papers" ("customers_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apapers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "user_shops_id" integer DEFAULT NULL, "customers_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_customers_id" ON "apapers" ("customers_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_user_shops_id" ON "apapers" ("user_shops_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_users_id" ON "apapers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "apapers" ("id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id")
+                     SELECT "id","name","user_id","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id" FROM "papers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "papers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "papers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "user_shops_id" integer DEFAULT NULL, "customers_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_papers_on_users_id" ON "papers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_user_shops_id" ON "papers" ("user_shops_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_customers_id" ON "papers" ("customers_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "papers" ("id","name","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id")
+                     SELECT "id","name","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id" FROM "apapers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "apapers"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apapers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "user_shop_id" integer DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "user_shops_id" integer DEFAULT NULL, "customers_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_customers_id" ON "apapers" ("customers_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_user_shops_id" ON "apapers" ("user_shops_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_users_id" ON "apapers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "apapers" ("id","name","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id")
+                     SELECT "id","name","paper_type","user_shop_id","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id" FROM "papers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "papers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "papers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "user_shops_id" integer DEFAULT NULL, "customers_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_users_id" ON "papers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_user_shops_id" ON "papers" ("user_shops_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_customers_id" ON "papers" ("customers_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "papers" ("id","name","paper_type","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id")
+                     SELECT "id","name","paper_type","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id" FROM "apapers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apapers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apapers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "customer_id" integer DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "user_shops_id" integer DEFAULT NULL, "customers_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_customers_id" ON "apapers" ("customers_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_user_shops_id" ON "apapers" ("user_shops_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_apapers_on_users_id" ON "apapers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "apapers" ("id","name","paper_type","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id")
+                     SELECT "id","name","paper_type","price_unit","customer_id","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id" FROM "papers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "papers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "papers" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "paper_type" varchar DEFAULT NULL, "price_unit" varchar DEFAULT NULL, "discount" varchar DEFAULT NULL, "deposit" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL, "user_shops_id" integer DEFAULT NULL, "customers_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_papers_on_users_id" ON "papers" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_user_shops_id" ON "papers" ("user_shops_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_papers_on_customers_id" ON "papers" ("customers_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "papers" ("id","name","paper_type","price_unit","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id")
+                     SELECT "id","name","paper_type","price_unit","discount","deposit","is_deleted","created_at","updated_at","users_id","user_shops_id","customers_id" FROM "apapers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apapers"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "user_shops" ADD "users_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_user_shops_on_users_id" ON "user_shops" ("users_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "auser_shops" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "ssm" varchar DEFAULT NULL, "boss_name" varchar DEFAULT NULL, "boss_phone" varchar DEFAULT NULL, "user_id" integer DEFAULT NULL, "nick_name" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_auser_shops_on_users_id" ON "auser_shops" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "auser_shops" ("id","name","address","ssm","boss_name","boss_phone","user_id","nick_name","is_deleted","created_at","updated_at","users_id")
+                     SELECT "id","name","address","ssm","boss_name","boss_phone","user_id","nick_name","is_deleted","created_at","updated_at","users_id" FROM "user_shops"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "user_shops"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "user_shops" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "ssm" varchar DEFAULT NULL, "boss_name" varchar DEFAULT NULL, "boss_phone" varchar DEFAULT NULL, "nick_name" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_user_shops_on_users_id" ON "user_shops" ("users_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "user_shops" ("id","name","address","ssm","boss_name","boss_phone","nick_name","is_deleted","created_at","updated_at","users_id")
+                     SELECT "id","name","address","ssm","boss_name","boss_phone","nick_name","is_deleted","created_at","updated_at","users_id" FROM "auser_shops"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "auser_shops"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "auser_shops" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "ssm" varchar DEFAULT NULL, "boss_name" varchar DEFAULT NULL, "boss_phone" varchar DEFAULT NULL, "nick_name" varchar DEFAULT NULL, "is_deleted" boolean DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_auser_shops_on_users_id" ON "auser_shops" ("users_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "auser_shops" ("id","name","address","ssm","boss_name","boss_phone","nick_name","is_deleted","created_at","updated_at","users_id")
+                     SELECT "id","name","address","ssm","boss_name","boss_phone","nick_name","is_deleted","created_at","updated_at","users_id" FROM "user_shops"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "user_shops"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "user_shops" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "address" varchar DEFAULT NULL, "ssm" varchar DEFAULT NULL, "boss_name" varchar DEFAULT NULL, "boss_phone" varchar DEFAULT NULL, "nick_name" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_user_shops_on_users_id" ON "user_shops" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "user_shops" ("id","name","address","ssm","boss_name","boss_phone","nick_name","created_at","updated_at","users_id")
+                     SELECT "id","name","address","ssm","boss_name","boss_phone","nick_name","created_at","updated_at","users_id" FROM "auser_shops"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "auser_shops"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220506073041"]]
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-05-07 17:39:32.065663"], ["updated_at", "2022-05-07 17:39:32.065663"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "123"], ["password", "1"], ["created_at", "2022-05-07 17:39:42.079621"], ["updated_at", "2022-05-07 17:39:42.079621"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[36mcommit transaction[0m
+Started OPTIONS "/login" for 127.0.0.1 at 2022-05-08 01:41:38 +0800
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/login" for 127.0.0.1 at 2022-05-08 01:41:38 +0800
+Processing by LoginController#create as HTML
+  Parameters: {"name"=>"123", "password"=>"[FILTERED]", "login"=>{"name"=>"123", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? AND "users"."password" = ? LIMIT ?[0m  [["name", "123"], ["password", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:6:in `create'
+Completed 200 OK in 22ms (Views: 0.5ms | ActiveRecord: 1.2ms | Allocations: 10485)
+
+
+Started OPTIONS "/user_shops/1" for 127.0.0.1 at 2022-05-08 01:41:38 +0800
+Started GET "/user_shops/1" for 127.0.0.1 at 2022-05-08 01:41:38 +0800
+Processing by UserShopsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.4ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" IS NULL[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 5731)
+
+
+Started GET "/user_shops/1" for 127.0.0.1 at 2022-05-08 01:41:45 +0800
+Processing by UserShopsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.2ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" IS NULL[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 2398)
+
+
+Started OPTIONS "/user_shops" for 127.0.0.1 at 2022-05-08 01:41:53 +0800
+Started POST "/user_shops" for 127.0.0.1 at 2022-05-08 01:41:53 +0800
+Processing by UserShopsController#create as HTML
+  Parameters: {"nick_name"=>"1", "name"=>"2", "address"=>"3", "ssm"=>"4", "boss_name"=>"5", "boss_phone"=>"6", "user_shop"=>{"name"=>"2", "address"=>"3", "ssm"=>"4", "boss_name"=>"5", "boss_phone"=>"6", "nick_name"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.2ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" IS NULL[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameter: :user_shop[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_shops_controller.rb:27:in `create'
+  [1m[36mUserShop Create (1.4ms)[0m  [1m[32mINSERT INTO "user_shops" ("name", "address", "ssm", "boss_name", "boss_phone", "nick_name", "created_at", "updated_at", "users_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "2"], ["address", "3"], ["ssm", "4"], ["boss_name", "5"], ["boss_phone", "6"], ["nick_name", "1"], ["created_at", "2022-05-07 17:41:53.807256"], ["updated_at", "2022-05-07 17:41:53.807256"], ["users_id", 1]]
+  ↳ app/controllers/user_shops_controller.rb:27:in `create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_shops_controller.rb:27:in `create'
+Completed 200 OK in 29ms (Views: 0.8ms | ActiveRecord: 6.5ms | Allocations: 10096)
+
+
+Started POST "/user_shops" for 127.0.0.1 at 2022-05-08 01:41:57 +0800
+Processing by UserShopsController#create as HTML
+  Parameters: {"nick_name"=>"123", "name"=>"2", "address"=>"3", "ssm"=>"4", "boss_name"=>"5", "boss_phone"=>"6", "user_shop"=>{"name"=>"2", "address"=>"3", "ssm"=>"4", "boss_name"=>"5", "boss_phone"=>"6", "nick_name"=>"123"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.3ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:53.807256"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mCACHE UserShop Load (0.0ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:53.807256"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameter: :user_shop[0m
+[31mUnpermitted parameter: :user_shop[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_shops_controller.rb:27:in `create'
+  [1m[36mUserShop Create (1.1ms)[0m  [1m[32mINSERT INTO "user_shops" ("name", "address", "ssm", "boss_name", "boss_phone", "nick_name", "created_at", "updated_at", "users_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "2"], ["address", "3"], ["ssm", "4"], ["boss_name", "5"], ["boss_phone", "6"], ["nick_name", "123"], ["created_at", "2022-05-07 17:41:57.658340"], ["updated_at", "2022-05-07 17:41:57.658340"], ["users_id", 1]]
+  ↳ app/controllers/user_shops_controller.rb:27:in `create'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_shops_controller.rb:27:in `create'
+Completed 200 OK in 36ms (Views: 0.7ms | ActiveRecord: 5.4ms | Allocations: 7068)
+
+
+Started GET "/user_shops/1" for 127.0.0.1 at 2022-05-08 01:41:59 +0800
+Processing by UserShopsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.5ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:57.658340"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 0.9ms | Allocations: 2581)
+
+
+Started OPTIONS "/papers" for 127.0.0.1 at 2022-05-08 01:42:00 +0800
+Started POST "/papers" for 127.0.0.1 at 2022-05-08 01:42:00 +0800
+Processing by PapersController#create as HTML
+  Parameters: {"page"=>1, "results"=>10, "paper"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "papers" WHERE "papers"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/controllers/papers_controller.rb:14:in `create'
+  [1m[36mPaper Load (0.5ms)[0m  [1m[34mSELECT "papers".* FROM "papers" WHERE "papers"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/controllers/papers_controller.rb:14:in `create'
+Completed 200 OK in 9ms (Views: 2.6ms | ActiveRecord: 1.4ms | Allocations: 3279)
+
+
+Started POST "/papers" for 127.0.0.1 at 2022-05-08 01:44:47 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-8~1.44.45", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-8~1.44.45", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+No template found for PapersController#create, rendering head :no_content
+Completed 204 No Content in 178ms (ActiveRecord: 2.4ms | Allocations: 13893)
+
+
+Started POST "/papers" for 127.0.0.1 at 2022-05-08 01:45:28 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-8~1.45.27", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-8~1.45.27", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.3ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:57.658340"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:18:in `create'
+  [1m[36mPaper Create (1.2ms)[0m  [1m[32mINSERT INTO "papers" ("name", "paper_type", "price_unit", "discount", "deposit", "created_at", "updated_at", "users_id", "user_shops_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "2022-5-8~1.45.27"], ["paper_type", "quotation"], ["price_unit", "rm"], ["discount", "0.00"], ["deposit", "8.00"], ["created_at", "2022-05-07 17:45:28.727343"], ["updated_at", "2022-05-07 17:45:28.727343"], ["users_id", 1], ["user_shops_id", 2]]
+  ↳ app/controllers/papers_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:18:in `create'
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :customer, :discount, :deposit, :paper[0m
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."papers_id" = ?[0m  [["papers_id", 1]]
+  ↳ app/controllers/papers_controller.rb:24:in `create'
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :discount, :deposit, :items, :paper[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:34:in `create'
+  [1m[36mCustomer Create (0.9ms)[0m  [1m[32mINSERT INTO "customers" ("name", "address", "phone", "created_at", "updated_at", "users_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "123"], ["address", "456"], ["phone", "7890"], ["created_at", "2022-05-07 17:45:28.771633"], ["updated_at", "2022-05-07 17:45:28.771633"], ["users_id", 1]]
+  ↳ app/controllers/papers_controller.rb:34:in `create'
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:34:in `create'
+Completed 200 OK in 153ms (Views: 0.7ms | ActiveRecord: 16.9ms | Allocations: 42904)
+
+
+Started GET "//papers" for ::1 at 2022-05-08 01:45:32 +0800
+Processing by PapersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mPaper Load (0.5ms)[0m  [1m[34mSELECT "papers".* FROM "papers"[0m
+  ↳ app/controllers/papers_controller.rb:6:in `index'
+Completed 200 OK in 10ms (Views: 4.2ms | ActiveRecord: 1.0ms | Allocations: 2043)
+
+
+Started POST "/papers" for 127.0.0.1 at 2022-05-08 01:48:11 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-8~1.48.11", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-8~1.48.11", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.6ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:57.658340"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 6.0ms | Allocations: 22662)
+
+
+  
+ArgumentError (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+  
+app/helpers/application_helper.rb:16:in `return_valid_fail_json'
+app/controllers/papers_controller.rb:42:in `create'
+Started GET "//papers" for ::1 at 2022-05-08 01:48:19 +0800
+Processing by PapersController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mPaper Load (0.7ms)[0m  [1m[34mSELECT "papers".* FROM "papers"[0m
+  ↳ app/controllers/papers_controller.rb:6:in `index'
+Completed 200 OK in 8ms (Views: 4.2ms | ActiveRecord: 1.0ms | Allocations: 2245)
+
+
+Started POST "//papers" for ::1 at 2022-05-08 01:48:23 +0800
+Processing by PapersController#create as */*
+  Parameters: {"name"=>"1", "paper_type"=>"quotation", "price_unit"=>"sgd", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"1", "deposit"=>"1", "items"=>[{"sort_id"=>"0", "description"=>"a", "unit_price"=>0, "unit"=>0}, {"sort_id"=>"1", "description"=>"a", "unit_price"=>0, "unit"=>0}], "paper"=>{"name"=>"1", "paper_type"=>"quotation", "price_unit"=>"sgd", "discount"=>"1", "deposit"=>"1"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.2ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:57.658340"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.7ms | Allocations: 4192)
+
+
+  
+ArgumentError (You invoked render but did not give any of :partial, :template, :inline, :file, :plain, :html or :body option.):
+  
+app/helpers/application_helper.rb:16:in `return_valid_fail_json'
+app/controllers/papers_controller.rb:42:in `create'
+Started POST "//papers" for ::1 at 2022-05-08 01:49:55 +0800
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as */*
+  Parameters: {"name"=>"1", "paper_type"=>"quotation", "price_unit"=>"sgd", "customer"=>{"name"=>"123", "address"=>"456", "phone"=>"7890"}, "discount"=>"1", "deposit"=>"1", "items"=>[{"sort_id"=>"0", "description"=>"a", "unit_price"=>0, "unit"=>0}, {"sort_id"=>"1", "description"=>"a", "unit_price"=>0, "unit"=>0}], "paper"=>{"name"=>"1", "paper_type"=>"quotation", "price_unit"=>"sgd", "discount"=>"1", "deposit"=>"1"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.4ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:57.658340"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :discount, :deposit, :items, :paper[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:21:in `create'
+  [1m[36mCustomer Create (1.0ms)[0m  [1m[32mINSERT INTO "customers" ("name", "address", "phone", "created_at", "updated_at", "users_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "123"], ["address", "456"], ["phone", "7890"], ["created_at", "2022-05-07 17:49:55.501632"], ["updated_at", "2022-05-07 17:49:55.501632"], ["users_id", 1]]
+  ↳ app/controllers/papers_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:28:in `create'
+  [1m[36mPaper Create (1.2ms)[0m  [1m[32mINSERT INTO "papers" ("name", "paper_type", "price_unit", "discount", "deposit", "created_at", "updated_at", "users_id", "user_shops_id", "customers_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "1"], ["paper_type", "quotation"], ["price_unit", "sgd"], ["discount", "1"], ["deposit", "1"], ["created_at", "2022-05-07 17:49:55.515264"], ["updated_at", "2022-05-07 17:49:55.515264"], ["users_id", 1], ["user_shops_id", 2], ["customers_id", 2]]
+  ↳ app/controllers/papers_controller.rb:28:in `create'
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:28:in `create'
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :customer, :discount, :deposit, :paper[0m
+  [1m[36mItem Load (0.5ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."papers_id" = ?[0m  [["papers_id", 2]]
+  ↳ app/controllers/papers_controller.rb:34:in `create'
+Completed 200 OK in 99ms (Views: 0.7ms | ActiveRecord: 16.9ms | Allocations: 39624)
+
+
+Started GET "//customers" for ::1 at 2022-05-08 01:50:03 +0800
+Processing by CustomersController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/customers_controller.rb:6:in `index'
+Completed 200 OK in 7ms (Views: 3.7ms | ActiveRecord: 0.5ms | Allocations: 2385)
+
+
+Started POST "/papers" for 127.0.0.1 at 2022-05-08 01:50:18 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PapersController#create as HTML
+  Parameters: {"name"=>"2022-5-8~1.48.11", "paper_type"=>"quotation", "price_unit"=>"rm", "customer"=>{"name"=>"4544444", "address"=>"456", "phone"=>"7890"}, "discount"=>"0.00", "deposit"=>"8.00", "items"=>[{"sort_id"=>0, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}, {"sort_id"=>1, "description"=>"5", "unit_price"=>"6", "unit"=>"7", "price"=>"8"}, {"sort_id"=>2, "description"=>"1", "unit_price"=>"2", "unit"=>"3", "price"=>"4"}], "paper"=>{"name"=>"2022-5-8~1.48.11", "paper_type"=>"quotation", "price_unit"=>"rm", "discount"=>"0.00", "deposit"=>"8.00"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+[31mUnpermitted parameters: :customer, :items, :paper[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("user_shops"."created_at") FROM "user_shops" WHERE "user_shops"."users_id" = ?[0m  [["users_id", 1]]
+  ↳ app/helpers/user_shops_helper.rb:4:in `current_User_Shop'
+  [1m[36mUserShop Load (0.6ms)[0m  [1m[34mSELECT "user_shops".* FROM "user_shops" WHERE "user_shops"."users_id" = ? AND "user_shops"."created_at" = ?[0m  [["users_id", 1], ["created_at", "2022-05-07 17:41:57.658340"]]
+  ↳ app/helpers/user_shops_helper.rb:5:in `current_User_Shop'
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :discount, :deposit, :items, :paper[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:21:in `create'
+  [1m[36mCustomer Create (1.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "address", "phone", "created_at", "updated_at", "users_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "4544444"], ["address", "456"], ["phone", "7890"], ["created_at", "2022-05-07 17:50:18.581130"], ["updated_at", "2022-05-07 17:50:18.581130"], ["users_id", 1]]
+  ↳ app/controllers/papers_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/papers_controller.rb:28:in `create'
+  [1m[36mPaper Create (2.0ms)[0m  [1m[32mINSERT INTO "papers" ("name", "paper_type", "price_unit", "discount", "deposit", "created_at", "updated_at", "users_id", "user_shops_id", "customers_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "2022-5-8~1.48.11"], ["paper_type", "quotation"], ["price_unit", "rm"], ["discount", "0.00"], ["deposit", "8.00"], ["created_at", "2022-05-07 17:50:18.597085"], ["updated_at", "2022-05-07 17:50:18.597085"], ["users_id", 1], ["user_shops_id", 2], ["customers_id", 3]]
+  ↳ app/controllers/papers_controller.rb:28:in `create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/papers_controller.rb:28:in `create'
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameter: :price[0m
+[31mUnpermitted parameters: :name, :paper_type, :price_unit, :customer, :discount, :deposit, :paper[0m
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."papers_id" = ?[0m  [["papers_id", 3]]
+  ↳ app/controllers/papers_controller.rb:34:in `create'
+Completed 200 OK in 112ms (Views: 0.7ms | ActiveRecord: 19.4ms | Allocations: 39971)
+
+
+Started GET "//customers" for ::1 at 2022-05-08 01:50:21 +0800
+Processing by CustomersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ app/controllers/customers_controller.rb:6:in `index'
+Completed 200 OK in 9ms (Views: 4.2ms | ActiveRecord: 0.7ms | Allocations: 2548)
+
+
+Started GET "//papers" for ::1 at 2022-05-08 01:50:25 +0800
+Processing by PapersController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mPaper Load (0.3ms)[0m  [1m[34mSELECT "papers".* FROM "papers"[0m
+  ↳ app/controllers/papers_controller.rb:6:in `index'
+Completed 200 OK in 8ms (Views: 4.3ms | ActiveRecord: 0.6ms | Allocations: 2339)
+
+

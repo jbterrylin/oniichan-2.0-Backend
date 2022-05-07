@@ -1,9 +1,7 @@
 class AddFk < ActiveRecord::Migration[6.1]
   def change
     add_reference :customers, :users
-    add_reference :customers, :papers
     remove_column :customers, :user_id, :bigint
-    remove_column :customers, :paper_id, :bigint
 
     add_reference :items, :papers
     add_reference :items, :users
@@ -12,8 +10,9 @@ class AddFk < ActiveRecord::Migration[6.1]
 
     add_reference :papers, :users
     add_reference :papers, :user_shops
+    add_reference :papers, :customers
     remove_column :papers, :user_id, :bigint
-    remove_column :papers, :user_shops_id, :bigint
+    remove_column :papers, :user_shop_id, :bigint
     remove_column :papers, :customer_id, :bigint
 
     add_reference :user_shops, :users

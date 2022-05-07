@@ -20,8 +20,6 @@ ActiveRecord::Schema.define(version: 2022_05_06_073041) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "users_id"
-    t.integer "papers_id"
-    t.index ["papers_id"], name: "index_customers_on_papers_id"
     t.index ["users_id"], name: "index_customers_on_users_id"
   end
 
@@ -50,6 +48,8 @@ ActiveRecord::Schema.define(version: 2022_05_06_073041) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "users_id"
     t.integer "user_shops_id"
+    t.integer "customers_id"
+    t.index ["customers_id"], name: "index_papers_on_customers_id"
     t.index ["user_shops_id"], name: "index_papers_on_user_shops_id"
     t.index ["users_id"], name: "index_papers_on_users_id"
   end
