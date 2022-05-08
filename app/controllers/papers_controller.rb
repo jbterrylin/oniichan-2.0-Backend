@@ -16,6 +16,11 @@ class PapersController < ApplicationController
             if(params[:price_unit])
                 all = all.where(price_unit: params[:price_unit])
             end
+            if(params[:name])
+                puts params[:name]
+                all = all.where("name like ?", "%#{params[:name][0]}%")
+                puts all
+            end
 
             papers = nil
 
