@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :user_shops
   resources :items
   resources :papers
+
+  post '/papers_with_pagination', to: 'papers#pagination'
+
   resources :customers
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
