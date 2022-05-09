@@ -4,6 +4,12 @@ class Paper < ApplicationRecord
     belongs_to :user_shop, class_name: "UserShop", foreign_key: "user_shops_id"
     has_many :items, class_name: "Item", foreign_key: "papers_id"
 
+    attr_accessor :total_price
+
+    def total_price
+        @total_price || "0.00"
+    end
+
     accepts_nested_attributes_for :customer, :items
 
     validates :name, presence: true

@@ -11,8 +11,4 @@ module ApplicationHelper
         id = JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[:user_id]
         return User.find(id)
     end
-    
-    def return_valid_fail_json(obj)
-        render json: { errors: obj.errors.objects.first.full_message }, status: 422
-    end
 end

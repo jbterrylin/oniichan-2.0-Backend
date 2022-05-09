@@ -27,7 +27,7 @@ class UserShopsController < ApplicationController
         if  shop.valid? & shop.save
             render json: { status: :ok, data: shop, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
         else
-            helpers.return_valid_fail_json(shop)
+            return_valid_fail_json(shop)
         end
     end
 
