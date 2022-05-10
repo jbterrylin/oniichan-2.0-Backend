@@ -21,4 +21,5 @@ class Paper < ApplicationRecord
     validates :customers_id, presence: true
     validates :user_shops_id, presence: true
     validates :users_id, presence: true
+    validates :comment, presence: false
 end

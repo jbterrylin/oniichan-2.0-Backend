@@ -34,6 +34,6 @@ class UserShopsController < ApplicationController
     private
     # Only allow a list of trusted parameters through.
     def user_shop_params
-        params.permit(:name, :address, :ssm, :boss_name, :boss_phone, :nick_name)
+        params.permit(:name, :address, :ssm, :boss_name, :boss_phone, :nick_name, :comment)
     end
 end

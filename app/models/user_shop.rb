@@ -8,4 +8,5 @@ class UserShop < ApplicationRecord
     validates :boss_phone, presence: true
     validates :nick_name, presence: true
     validates :users_id, presence: true
+    validates :comment, presence: false
 end

@@ -160,7 +160,7 @@ class PapersController < ApplicationController
 
     private
     def paper_params
-        params.permit(:name, :paper_type, :shop_id, :price_unit, :customer_id, :discount, :deposit, :is_deleted)
+        params.permit(:name, :paper_type, :shop_id, :price_unit, :customer_id, :discount, :deposit, :comment, :is_deleted)
       # , customer: [ :name, :address, :phone ], items: [:sort_id, :description, :unit_price, :unit]
     end
 end

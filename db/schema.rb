@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_06_073041) do
+ActiveRecord::Schema.define(version: 2022_05_10_122354) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_073041) do
     t.integer "users_id"
     t.integer "user_shops_id"
     t.integer "customers_id"
+    t.string "comment"
     t.index ["customers_id"], name: "index_papers_on_customers_id"
     t.index ["user_shops_id"], name: "index_papers_on_user_shops_id"
     t.index ["users_id"], name: "index_papers_on_users_id"
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_073041) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "users_id"
+    t.string "comment"
     t.index ["users_id"], name: "index_user_shops_on_users_id"
   end
 
