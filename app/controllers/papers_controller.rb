@@ -12,7 +12,7 @@ class PapersController < ApplicationController
 
     def pagination
         if(params[:page] & params[:results])
-            all = Paper.where(users_id: helpers.get_user_id).includes(:items)
+            all = Paper.where(users_id: helpers.get_user_id).where(is_deleted: [nil, false])
             # filter
             if(params[:paper_type])
                 all = all.where(paper_type: params[:paper_type])
@@ -24,8 +24,9 @@ class PapersController < ApplicationController
                 all = all.where("name like ?", "%#{params[:name][0]}%")
             end
 
-            papers = nil
+            all = all.includes(:items)
 
+            papers = nil
             # sort
             if(params[:sortField])
                 papers = all.order(params[:sortField] + (params[:sortOrder] == "ascend" ? "" : " DESC")).first(params[:results] * params[:page]).last(10)
@@ -80,7 +81,7 @@ class PapersController < ApplicationController
                 end
             end
             
-            render json: { status: :ok, data: paper, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+            render json: { status: :ok, data: paper, showToast: { message: "成功增加", color: "primary", timer: 2000, icon: "mdi" } }
         else
             return_valid_fail_json(paper)
         end
@@ -137,7 +138,7 @@ class PapersController < ApplicationController
 
                 oriPaper.save
                 
-                render json: { status: :ok, data: oriPaper, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+                render json: { status: :ok, data: oriPaper, showToast: { message: "成功修改", color: "primary", timer: 2000, icon: "mdi" } }
                 return
             else
                 return_valid_fail_json(oriPaper.customer)
@@ -147,12 +148,14 @@ class PapersController < ApplicationController
             return_valid_fail_json(oriPaper)
             return
         end
-        puts oriPaper.customer.valid?
-        # puts oriPaper.customer.errors.objects.first.full_message
-        # oriPaper.customer.update()
-        puts oriPaper.as_json
-        puts "reach"
-        render json: { status: :ok, data: oriPaper, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+    end
+
+    def destroy
+        paper = Paper.find(params[:id])
+        paper.update(is_deleted: true)
+        paper.customer.update(is_deleted: true)
+        paper.items.update_all(is_deleted: true)
+        render json: { status: :ok, data: paper, showToast: { message: "成功删除", color: "primary", timer: 2000, icon: "mdi" } }
     end
 
     private
