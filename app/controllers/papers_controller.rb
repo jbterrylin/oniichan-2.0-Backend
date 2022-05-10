@@ -6,6 +6,10 @@ class PapersController < ApplicationController
         render json: { status: :ok, data: papers }
     end
 
+    def show
+        render json: { status: :ok, data: Paper.find(params[:id]).as_json(include: [:customer, :items]) }
+    end
+
     def pagination
         if(params[:page] & params[:results])
             all = Paper.where(users_id: helpers.get_user_id).includes(:items)
@@ -35,7 +39,7 @@ class PapersController < ApplicationController
                     total_price += item[:unit_price].to_f * item[:unit].to_f
                 end
                 total_price -= paper[:discount].to_f
-                if paper[:paper_type] == "receipt"
+                if paper[:paper_type] == "invoice"
                     total_price -= paper[:deposit].to_f
                 end
                 paper.total_price = view_context.number_with_precision(total_price, precision: 2).to_s
@@ -67,7 +71,9 @@ class PapersController < ApplicationController
 
             paper.items.new(items)
             paper.items.each do |item|
-                if !item.valid? & item.save
+                if item.valid?
+                    item.save
+                else
                     return_valid_fail_json(item)
                     paper.destroy
                     return
@@ -80,8 +86,76 @@ class PapersController < ApplicationController
         end
     end
 
-    private
+    def update
+        # puts params
+        oriPaper = Paper.find(params[:id])
+        newPaper = paper_params.keep_if {|k, v| ["name", "paper_type", "price_unit", "discount", "deposit"].include?(k)}
+        if oriPaper.as_json.except("id", "is_deleted", "created_at", "updated_at", "users_id", "user_shops_id", "customers_id") == newPaper
+            puts "1"
+            oriCustomer = oriPaper.customer.as_json.except("id", "is_deleted", "created_at", "updated_at", "users_id")
+            newCustomer = params.permit(customer: [:name, :address, :phone])[:customer]
+            if oriCustomer == newCustomer
+                puts "2"
+                newItems = params.permit(items: [:sort_id, :description, :unit_price, :unit])[:items]
+                if oriPaper.items.count == newItems.length
+                    puts "3"
+                    # compare variable
+                    comparedResult = []
+                    oriPaper.items.as_json.each_with_index do |item, index|
+                        oriItem = item.except("id", "is_deleted", "created_at", "updated_at", "users_id", "papers_id")
+                        comparedResult << (oriItem == newItems[index])
+                    end
+                    if comparedResult.count(true) == oriPaper.items.count
+                        puts "4"
+                        render json: { errors: "Don't update paper with same data" }, status: 422
+                        return
+                    end
+                end
+            end
+        end
 
+        oriPaper.assign_attributes(helpers.object_with_user_id(paper_params))
+        if oriPaper.valid?
+            oriPaper.customer.assign_attributes(helpers.object_with_user_id(params.permit(customer: [:name, :address, :phone])[:customer]))
+            if oriPaper.customer.valid?
+                items = params.permit(items: [:sort_id, :description, :unit_price, :unit])[:items]
+                items.each_with_index do |item, index| items[index] = helpers.object_with_user_id(item) end
+                
+                
+                newItems = []
+                items.each do |item|
+                    newItem = Item.new(helpers.object_with_user_id(item))
+                    if !newItem.valid?
+                        return_valid_fail_json(newItem)
+                        return
+                    end
+                    newItems << item
+                end
+                oriPaper.items = []
+                oriPaper.items_attributes = newItems
+                # oriPaper.autosave_associated_records_for_items
+
+                oriPaper.save
+                
+                render json: { status: :ok, data: oriPaper, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+                return
+            else
+                return_valid_fail_json(oriPaper.customer)
+                return
+            end
+        else
+            return_valid_fail_json(oriPaper)
+            return
+        end
+        puts oriPaper.customer.valid?
+        # puts oriPaper.customer.errors.objects.first.full_message
+        # oriPaper.customer.update()
+        puts oriPaper.as_json
+        puts "reach"
+        render json: { status: :ok, data: oriPaper, showToast: { message: "成功", color: "primary", timer: 2000, icon: "mdi" } }
+    end
+
+    private
     def paper_params
         params.permit(:name, :paper_type, :shop_id, :price_unit, :customer_id, :discount, :deposit, :is_deleted)
       # , customer: [ :name, :address, :phone ], items: [:sort_id, :description, :unit_price, :unit]

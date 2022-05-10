@@ -13,7 +13,7 @@ class Paper < ApplicationRecord
     accepts_nested_attributes_for :customer, :items
 
     validates :name, presence: true
-    validates :paper_type, presence: true, inclusion: { in: %w(quotation receipt), message: "%{value} is not a valid paper type" }
+    validates :paper_type, presence: true, inclusion: { in: %w(quotation invoice), message: "%{value} is not a valid paper type" }
     validates :price_unit, presence: true, inclusion: { in: %w(rm sgd), message: "%{value} is not a valid paper type" }
     validates :discount, presence: true
     validates :deposit, presence: true
