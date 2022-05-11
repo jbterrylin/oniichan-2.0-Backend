@@ -14,7 +14,7 @@ class UserShopsController < ApplicationController
         
         # only check if have record
         if !helpers.current_User_Shop.nil?
-            userShop = helpers.current_User_Shop.as_json.keep_if {|k, v| ["name", "address", "ssm", "boss_name", "boss_phone", "nick_name"].include?(k)}
+            userShop = helpers.current_User_Shop.as_json.keep_if {|k, v| ["name", "address", "ssm", "boss_name", "boss_phone", "nick_name", "comment"].include?(k)}
 
             if user_shop_params == userShop
                 render json: { errors: "Don't update shop with same data" }, status: 422

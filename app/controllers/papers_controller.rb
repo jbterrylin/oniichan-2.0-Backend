@@ -7,7 +7,7 @@ class PapersController < ApplicationController
     end
 
     def show
-        render json: { status: :ok, data: Paper.find(params[:id]).as_json(include: [:customer, :items]) }
+        render json: { status: :ok, data: Paper.find(params[:id]).as_json(include: [:customer, :items, :user_shop]) }
     end
 
     def pagination
@@ -90,7 +90,8 @@ class PapersController < ApplicationController
     def update
         # puts params
         oriPaper = Paper.find(params[:id])
-        newPaper = paper_params.keep_if {|k, v| ["name", "paper_type", "price_unit", "discount", "deposit"].include?(k)}
+        newPaper = paper_params.keep_if {|k, v| ["name", "paper_type", "price_unit", "discount", "deposit", "comment"].include?(k)}
+        puts "start check"
         if oriPaper.as_json.except("id", "is_deleted", "created_at", "updated_at", "users_id", "user_shops_id", "customers_id") == newPaper
             puts "1"
             oriCustomer = oriPaper.customer.as_json.except("id", "is_deleted", "created_at", "updated_at", "users_id")
@@ -122,7 +123,6 @@ class PapersController < ApplicationController
                 items = params.permit(items: [:sort_id, :description, :unit_price, :unit])[:items]
                 items.each_with_index do |item, index| items[index] = helpers.object_with_user_id(item) end
                 
-                
                 newItems = []
                 items.each do |item|
                     newItem = Item.new(helpers.object_with_user_id(item))
@@ -134,6 +134,10 @@ class PapersController < ApplicationController
                 end
                 oriPaper.items = []
                 oriPaper.items_attributes = newItems
+                
+                if params[:isUseNewShopInfo]
+                    oriPaper.user_shop = (helpers.current_User_Shop)
+                end
                 # oriPaper.autosave_associated_records_for_items
 
                 oriPaper.save
