@@ -43,3 +43,13 @@ en:
         description: "Customer description"
         unit_price: "Customer unit_price"
         unit: "Customer unit"
+    errors:
+      models:
+        customer:
+          attributes:
+            name:
+              blank: ": should be either filled in name, address or phone"
+            address:
+              blank: ": should be either filled in name, address or phone"
+            address:
+              blank: ": should be either filled in name, address or phone"

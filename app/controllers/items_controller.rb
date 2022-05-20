@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
     end
 
     def pagination
-        puts params
         if(params[:page] & params[:results])
             all = Item.where(users_id: helpers.get_user_id).where(is_deleted: [nil, false]).where.not(unit: [nil, ''])
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_10_122354) do
+ActiveRecord::Schema.define(version: 2022_05_19_132910) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_05_10_122354) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "users_id"
+    t.boolean "like"
     t.index ["users_id"], name: "index_customers_on_users_id"
   end
 
