@@ -2,16 +2,17 @@ Rails.application.routes.draw do
   # resources :login, :only => [:create]
   post '/login', to: 'login#create'
 
+  post '/papers_with_pagination', to: 'papers#pagination'
+  post '/items_with_pagination', to: 'items#pagination'
+  post '/customers_with_pagination', to: 'customers#pagination'
+  put '/like_customer', to: 'customers#like'
+  get '/customers/like', to: 'customers#index'
+
   resources :users
   resources :user_shops
   resources :items
   resources :customers
   resources :papers
-
-  post '/papers_with_pagination', to: 'papers#pagination'
-  post '/items_with_pagination', to: 'items#pagination'
-  post '/customers_with_pagination', to: 'customers#pagination'
-  put '/like_customer', to: 'customers#like'
 
 
   resources :customers

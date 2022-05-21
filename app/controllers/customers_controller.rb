@@ -2,8 +2,16 @@ class CustomersController < ApplicationController
     before_action :authorize_request
 
     def index
-        customers = Customer.all
+        customers = Customer.where(users_id: helpers.get_user_id).where(is_deleted: [nil, false])
+        
+        if request.path == "/customers/like"
+            customers = customers.where(like: true)
+        end
         render json: { status: :ok, data: customers.as_json(include: [  papers: {only: [:id]}  ]) }
+    end
+
+    def show
+        render json: { status: :ok, data: Customer.find(params[:id])}
     end
 
     def pagination

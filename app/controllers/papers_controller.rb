@@ -2,7 +2,7 @@ class PapersController < ApplicationController
     before_action :authorize_request
 
     def index
-        papers = Paper.all
+        papers = Paper.where(users_id: helpers.get_user_id).where(is_deleted: [nil, false])
         render json: { status: :ok, data: papers }
     end
 

@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
     before_action :authorize_request
 
     def index
-        item = Item.all
+        item = Item.where(users_id: helpers.get_user_id).where(is_deleted: [nil, false])
         render json: { status: :ok, data: item }
     end
 
