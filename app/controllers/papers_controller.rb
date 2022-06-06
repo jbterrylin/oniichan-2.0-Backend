@@ -57,7 +57,7 @@ class PapersController < ApplicationController
         paper.user_shop = helpers.current_User_Shop
 
         # customer
-        customer = params.permit(customer: [:name, :address, :phone])[:customer]
+        customer = params.permit(customer: [:name, :address, :phone, :ssm])[:customer]
         paper.create_customer(helpers.object_with_user_id(customer))
         if !paper.customer.valid?
             return_valid_fail_json(paper.customer)
@@ -95,7 +95,7 @@ class PapersController < ApplicationController
         if oriPaper.as_json.except("id", "is_deleted", "created_at", "updated_at", "users_id", "user_shops_id", "customers_id") == newPaper
             puts "1"
             oriCustomer = oriPaper.customer.as_json.except("id", "is_deleted", "created_at", "updated_at", "users_id")
-            newCustomer = params.permit(customer: [:name, :address, :phone])[:customer]
+            newCustomer = params.permit(customer: [:name, :address, :phone, :ssm])[:customer]
             if oriCustomer == newCustomer
                 puts "2"
                 newItems = params.permit(items: [:sort_id, :description, :unit_price, :unit])[:items]
@@ -118,7 +118,7 @@ class PapersController < ApplicationController
 
         oriPaper.assign_attributes(helpers.object_with_user_id(paper_params))
         if oriPaper.valid?
-            oriPaper.customer.assign_attributes(helpers.object_with_user_id(params.permit(customer: [:name, :address, :phone])[:customer]))
+            oriPaper.customer.assign_attributes(helpers.object_with_user_id(params.permit(customer: [:name, :address, :phone, :ssm])[:customer]))
             if oriPaper.customer.valid?
                 items = params.permit(items: [:sort_id, :description, :unit_price, :unit])[:items]
                 items.each_with_index do |item, index| items[index] = helpers.object_with_user_id(item) end
