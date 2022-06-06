@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
     validates_presence_of :name, if: Proc.new { |customer| !customer.address? & !customer.phone? }
     validates_presence_of :address, if: Proc.new { |customer| !customer.name? & !customer.phone? }
     validates_presence_of :phone, if: Proc.new { |customer| !customer.name? & !customer.address? }
+    validates :ssm, presence: false
     validates :is_deleted, presence: false
     validates :users_id, presence: true
 end

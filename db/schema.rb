@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_05_141308) do
+ActiveRecord::Schema.define(version: 2022_06_06_170234) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2022_06_05_141308) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "users_id"
     t.boolean "like"
+    t.string "ssm"
     t.index ["users_id"], name: "index_customers_on_users_id"
   end
 
