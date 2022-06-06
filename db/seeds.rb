@@ -22,8 +22,19 @@
 #   { cn: '油漆', en: 'Paint', category: '墙壁', users_id: 1 }, 
 # ])
 
-Word.create([
-  { cn: '老二', en: 'second', category: '木', users_id: 2 }, 
-  { cn: '鸡巴', en: 'jijiba', category: '木', users_id: 2 }, 
-  { cn: '大屌', en: 'dick', category: '木', users_id: 2 }, 
-])
+# Word.create([
+#   { cn: '老二', en: 'second', category: '木', users_id: 2 }, 
+#   { cn: '鸡巴', en: 'jijiba', category: '木', users_id: 2 }, 
+#   { cn: '大屌', en: 'dick', category: '木', users_id: 2 }, 
+# ])
+
+# remember add require fk
+
+require 'csv'
+
+CSV.foreach(Rails.root.join('lib/seed_csv/users.csv'), headers: true) do |row|
+  User.create( {
+    name: row["name"], 
+    password: row[1],
+  } ) 
+end
