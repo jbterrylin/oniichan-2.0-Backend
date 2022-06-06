@@ -7,12 +7,13 @@ Rails.application.routes.draw do
   post '/customers_with_pagination', to: 'customers#pagination'
   put '/like_customer', to: 'customers#like'
   get '/customers/like', to: 'customers#index'
-
+  
   resources :users
   resources :user_shops
   resources :items
   resources :customers
   resources :papers
+  resources :words
 
 
   resources :customers

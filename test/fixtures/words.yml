@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cn: MyString
+  en: MyString
+  cat1: MyString
+  cat2: MyString
+
+two:
+  cn: MyString
+  en: MyString
+  cat1: MyString
+  cat2: MyString

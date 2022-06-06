@@ -16,6 +16,8 @@ rails g model Paper name:string user_id:bigint paper_type:string user_shop_id:bi
 
 rails g model Customer name:string address:string phone:string is_deleted:boolean user_id:bigint paper_id:bigint
 
+rails g model Word cn:string en:string cat1:string cat2:string
+
 bin/rails db:migrate
 
 rake routes
@@ -24,3 +26,5 @@ rake routes
 rails db:drop:_unsafe
 rails db:create db:migrate
 rake db:seed
+
+"convert(subject USING GBK)" // sort mandarin
